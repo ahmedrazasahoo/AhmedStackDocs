@@ -1,3 +1,45 @@
+<template>
+  <div class="counter-container">
+    <div :class="StyleBinding">
+      <h1 :="objectOfAttrs">Binding the Attribute Bindings</h1>
+      <div :id="`list-${count}`">
+        <p>ID Set the values with expression with class</p>
+      </div>
+        <button class="button" @click="handledisk(count)"> Call Funcation</button>
+
+      <h4>
+        Current Style Binding is :
+        <span>{{ StyleBinding }}</span>
+      </h4>
+      <h3>Javescript Object Binding for the Attribute</h3>
+    </div>
+
+    <div v-html="raw_tag"></div>
+    <div class="raw_tag">
+      {{ raw_tag }}
+    </div>
+
+    <h1 class="title">{{ txt }}</h1>
+
+    <div class="counter-card">
+      <h2 class="count-display">
+        {{ count > 1 ? "Ahmed Raza" : "Chal Dafa ho" }}<br />{{ count }}
+      </h2>
+
+      <div class="btn-group">
+        <button class="btn decrement" @click="decrement">−</button>
+        <button
+          :disabled="ButtonDisable"
+          class="btn increment"
+          @click="increment"
+        >
+          +
+        </button>
+      </div>
+    </div>
+  </div>
+</template>
+
 <script>
 export default {
   data() {
@@ -7,6 +49,10 @@ export default {
       count: 0,
       StyleBinding: "normal",
       ButtonDisable: false,
+      objectOfAttrs: {
+        id: "container",
+        class: "wrapper",
+      },
     };
   },
   methods: {
@@ -34,41 +80,23 @@ export default {
         this.ButtonDisable = false;
       }
     },
+    handledisk(num) {
+      alert("Function Called with the value " + num/2);
+    },
   },
 };
 </script>
 
-<template>
-  <div class="counter-container">
-    <div :class="StyleBinding">
-      <h1>Binding the Attribute Bindings</h1>
-    </div>
-
-    <div v-html="raw_tag"></div>
-    <div class="raw_tag">
-      {{ raw_tag }}
-    </div>
-
-    <h1 class="title">{{ txt }}</h1>
-
-    <div class="counter-card">
-      <h2 class="count-display">{{ count }}</h2>
-
-      <div class="btn-group">
-        <button class="btn decrement" @click="decrement">−</button>
-        <button
-          :disabled="ButtonDisable"
-          class="btn increment"
-          @click="increment"
-        >
-          +
-        </button>
-      </div>
-    </div>
-  </div>
-</template>
-
 <style scoped>
+.button{
+  padding: 10px 15px;
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}
 .success {
   color: #58e735;
 }

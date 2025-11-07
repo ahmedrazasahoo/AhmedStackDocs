@@ -1,14 +1,16 @@
 <script>
 import Count from "@/components/Counter.vue";
+import Directives  from "@/components/Directive.vue";
 
 export default {
   components: {
-    Count
+    Count,
+    Directives,
   }
 }
 </script>
 <template>
-    <Count/>
+  <directives/>
 </template>
 
 <style></style>

@@ -10,9 +10,8 @@ import Main from './components/Main.vue'
     <div class="main-section">
       <Sidebar />
       <main class="content">
-        <h2>Welcome to AhmedStack Docs</h2>
+        <h2>WELCOME TO PRACTICE</h2>
           <Main/>
-        <p>This is your documentation workspace area.</p>
       </main>
     </div>
   </div>

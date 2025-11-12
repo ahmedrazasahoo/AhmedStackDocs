@@ -1,64 +1,129 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, defineProps, defineEmits } from 'vue'
+
+const props = defineProps({
+  activeView: {
+    type: String,
+    default: 'one'
+  }
+})
+
+const emit = defineEmits(['update:activeView'])
 
 const showDropdown = ref(false)
+
+const handleHome = () => {
+  alert(`💚 AhmedStack Docs Notice 💚\n\n🟩 ✨ Designed Alert Message ✨`);
+}
+
+const setActiveView = (view) => {
+  emit('update:activeView', view)
+  showDropdown.value = false
+}
 
 const toggleDropdown = () => {
   showDropdown.value = !showDropdown.value
 }
-const handleHome = (msg) => {
-  alert(`💚 AhmedStack Docs Notice 💚\n\n🟩 ✨ Designed Alert Message ✨`);
-}
 
-
-const handleAction = (action) => {
-  console.log(`You clicked: ${action}`)
-  showDropdown.value = false
+const getViewLabel = (view) => {
+  const labels = {
+    'one': 'Counter',
+    'two': 'Directive',
+    'three': 'Both',
+    'pageOne': 'Page One',
+    'pageTwo': 'Page Two',
+    'pageThree': 'Page Three'
+  }
+  return labels[view] || 'Select View'
 }
 </script>
 
 <template>
-  <header class="modern-header">
-    <div class="brand">
-      <img src="https://cdn-icons-png.flaticon.com/512/5968/5968705.png" alt="logo" class="logo" />
-      <h1>AhmedStack Docs</h1>
-    </div>
+  <header class="header">
+    <div class="header-container">
+      <div class="brand">
+        <img src="https://cdn-icons-png.flaticon.com/512/5968/5968705.png" alt="logo" class="logo" />
+        <h1 class="brand-title">AhmedStack Docs</h1>
+      </div>
 
-    <nav class="nav-links">
-      <a href="#" @click="handleHome('ki hal ha ')">Home</a>
-      <a href="#">Docs</a>
-      <a href="#">Guides</a>
-      <a href="#">About</a>
-    </nav>
+      <nav class="nav">
+        <a href="#" class="nav-link" @click="handleHome">Home</a>
+        <a href="#" class="nav-link">Docs</a>
+        <a href="#" class="nav-link">Guides</a>
+        <a href="#" class="nav-link">About</a>
+      </nav>
 
-    <div class="dropdown">
-      <button class="dropdown-btn" @click="toggleDropdown">
-        Menu
-        <span class="arrow" :class="{ open: showDropdown }">▾</span>
-      </button>
-      <div v-if="showDropdown" class="dropdown-menu">
-        <button @click="handleAction('Profile')">Profile</button>
-        <button @click="handleAction('Settings')">Settings</button>
-        <button @click="handleAction('Logout')">Logout</button>
+      <div class="dropdown">
+        <button class="dropdown-toggle" @click="toggleDropdown">
+          <span>{{ getViewLabel(activeView) }}</span>
+          <span class="arrow" :class="{ open: showDropdown }">▾</span>
+        </button>
+        <div v-if="showDropdown" class="dropdown-menu">
+          <button 
+            class="dropdown-item" 
+            :class="{ active: activeView === 'one' }"
+            @click="setActiveView('one')"
+          >
+            Counter
+          </button>
+          <button 
+            class="dropdown-item" 
+            :class="{ active: activeView === 'two' }"
+            @click="setActiveView('two')"
+          >
+            Directive
+          </button>
+          <button 
+            class="dropdown-item" 
+            :class="{ active: activeView === 'three' }"
+            @click="setActiveView('three')"
+          >
+            Both
+          </button>
+          <div class="dropdown-divider"></div>
+          <button 
+            class="dropdown-item" 
+            :class="{ active: activeView === 'pageOne' }"
+            @click="setActiveView('pageOne')"
+          >
+            Page One
+          </button>
+          <button 
+            class="dropdown-item" 
+            :class="{ active: activeView === 'pageTwo' }"
+            @click="setActiveView('pageTwo')"
+          >
+            Page Two
+          </button>
+          <button 
+            class="dropdown-item" 
+            :class="{ active: activeView === 'pageThree' }"
+            @click="setActiveView('pageThree')"
+          >
+            Page Three
+          </button>
+        </div>
       </div>
     </div>
   </header>
 </template>
 
 <style scoped>
-.modern-header {
+.header {
+  background: #1f2937;
+  border-bottom: 1px solid #374151;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(90deg, #10b981, #059669);
-  color: white;
-  padding: 0.9rem 2rem;
-  border-radius: 12px;
-  margin: 1rem;
-  box-shadow: 0 8px 20px rgba(0, 128, 0, 0.15);
 }
 
-/* 🧩 Brand */
 .brand {
   display: flex;
   align-items: center;
@@ -66,103 +131,126 @@ const handleAction = (action) => {
 }
 
 .logo {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
 }
 
-.brand h1 {
-  font-size: 1.4rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
+.brand-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #f9fafb;
+  letter-spacing: -0.025em;
 }
 
-/* 🔗 Navigation */
-.nav-links {
+.nav {
   display: flex;
-  gap: 1.5rem;
+  gap: 2rem;
+  align-items: center;
 }
 
-.nav-links a {
-  color: white;
+.nav-link {
+  color: #9ca3af;
   text-decoration: none;
+  font-size: 0.9375rem;
   font-weight: 500;
-  transition: opacity 0.3s, transform 0.2s;
+  transition: color 0.2s;
 }
 
-.nav-links a:hover {
-  opacity: 0.8;
-  transform: translateY(-1px);
+.nav-link:hover {
+  color: #f9fafb;
 }
 
-/* 🔽 Dropdown */
 .dropdown {
   position: relative;
 }
 
-.dropdown-btn {
-  background: white;
-  color: #065f46;
-  border: none;
-  padding: 0.55rem 1.2rem;
-  border-radius: 8px;
-  font-weight: 600;
+.dropdown-toggle {
+  background: #374151;
+  color: #f9fafb;
+  border: 1px solid #4b5563;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 0.35rem;
-  box-shadow: 0 2px 5px rgba(0, 128, 0, 0.15);
-  transition: background 0.3s, transform 0.2s;
+  gap: 0.5rem;
+  transition: all 0.2s;
+  min-width: 140px;
+  justify-content: space-between;
 }
 
-.dropdown-btn:hover {
-  background: #ecfdf5;
-  transform: translateY(-1px);
+.dropdown-toggle:hover {
+  background: #4b5563;
+  border-color: #6b7280;
 }
 
 .arrow {
-  transition: transform 0.3s;
+  font-size: 0.75rem;
+  transition: transform 0.2s;
 }
 
 .arrow.open {
   transform: rotate(180deg);
 }
 
-/* 📋 Dropdown Menu */
 .dropdown-menu {
   position: absolute;
   right: 0;
-  top: 120%;
-  background: white;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-  display: flex;
-  flex-direction: column;
-  min-width: 160px;
-  animation: fadeIn 0.25s ease;
+  top: calc(100% + 0.5rem);
+  background: #374151;
+  border: 1px solid #4b5563;
+  border-radius: 8px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+  min-width: 140px;
+  z-index: 50;
+  animation: fadeIn 0.15s ease;
 }
 
-.dropdown-menu button {
+.dropdown-item {
   background: none;
   border: none;
-  padding: 0.8rem 1rem;
+  width: 100%;
+  padding: 0.625rem 1rem;
   text-align: left;
-  color: #065f46;
+  color: #e5e7eb;
+  font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.15s;
 }
 
-.dropdown-menu button:hover {
-  background: #f0fdf4;
+.dropdown-item:first-child {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 
-/* ✨ Animation */
+.dropdown-item:last-child {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.dropdown-item:hover {
+  background: #4b5563;
+}
+
+.dropdown-item.active {
+  background: #3b82f6;
+  color: #fff;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: #4b5563;
+  margin: 0.25rem 0;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(-5px);
+    transform: translateY(-8px);
   }
   to {
     opacity: 1;

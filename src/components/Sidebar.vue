@@ -1,27 +1,18 @@
 <template>
   <aside :class="['sidebar', { collapsed: isCollapsed }]">
-    <!-- Sidebar Header -->
     <div class="sidebar-header">
-      <div class="header-left" v-if="!isCollapsed">
-        <h2 class="menu-title">📚 Docs Menu</h2>
-      </div>
-
-      <div class="header-right">
-        <button class="toggle-btn" @click="toggleSidebar">
-          {{ isCollapsed ? '→' : '←' }}
-        </button>
-
-        
-      </div>
+      <h2 v-if="!isCollapsed" class="sidebar-title">Docs Menu</h2>
+      <button class="toggle-btn" @click="toggleSidebar" :title="isCollapsed ? 'Expand' : 'Collapse'">
+        {{ isCollapsed ? '→' : '←' }}
+      </button>
     </div>
 
-    <!-- Sidebar Menu -->
     <nav class="sidebar-nav">
-      <ul>
+      <ul class="nav-list">
         <li v-for="item in menuItems" :key="item.name">
           <button class="nav-item" @click="handleClick(item.name)">
-            <span class="icon">{{ item.icon }}</span>
-            <span v-if="!isCollapsed" class="label">{{ item.name }}</span>
+            <span class="nav-icon">{{ item.icon }}</span>
+            <span v-if="!isCollapsed" class="nav-label">{{ item.name }}</span>
           </button>
         </li>
       </ul>
@@ -53,102 +44,106 @@ const menuItems = [
 
 <style scoped>
 .sidebar {
-  width: 260px;
-  background: linear-gradient(135deg, #16a34a, #22c55e);
-  color: white;
-  height: 100vh;
-  padding: 1rem;
+  width: 240px;
+  background: #1f2937;
+  border-right: 1px solid #374151;
   display: flex;
   flex-direction: column;
-  transition: all 0.3s ease;
-  border-top-right-radius: 1rem;
-  border-bottom-right-radius: 1rem;
-  box-shadow: 3px 0 10px rgba(0, 0, 0, 0.15);
+  transition: width 0.3s ease;
   overflow: hidden;
 }
 
 .sidebar.collapsed {
-  width: 90px;
+  width: 64px;
 }
 
 .sidebar-header {
+  padding: 1.5rem 1rem;
+  border-bottom: 1px solid #374151;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
 }
 
-.menu-title {
-  font-size: 1.2rem;
-  font-weight: bold;
-  letter-spacing: 0.5px;
+.sidebar-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #f9fafb;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-.header-right {
+.toggle-btn {
+  background: #374151;
+  border: 1px solid #4b5563;
+  color: #9ca3af;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
+  font-size: 0.875rem;
+  transition: all 0.2s;
 }
 
-.toggle-btn,
-.count-btn {
-  background: rgba(255, 255, 255, 0.15);
-  border: none;
-  color: white;
-  padding: 0.4rem 0.7rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
+.toggle-btn:hover {
+  background: #4b5563;
+  color: #f9fafb;
 }
 
-.toggle-btn:hover,
-.count-btn:hover {
-  background: rgba(255, 255, 255, 0.25);
-  transform: scale(1.05);
+.sidebar-nav {
+  padding: 1rem;
+  flex: 1;
+  overflow-y: auto;
 }
 
-/* Nav Menu */
-.sidebar-nav ul {
+.nav-list {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 .nav-item {
   width: 100%;
   background: transparent;
-  color: white;
   border: none;
   text-align: left;
   display: flex;
   align-items: center;
-  gap: 0.8rem;
-  padding: 0.8rem 1rem;
-  border-radius: 0.6rem;
+  gap: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  border-radius: 6px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  color: #9ca3af;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.15s;
 }
 
 .nav-item:hover {
-  background: rgba(255, 255, 255, 0.15);
-  transform: translateX(3px);
+  background: #374151;
+  color: #f9fafb;
 }
 
-.icon {
-  font-size: 1.3rem;
+.nav-icon {
+  font-size: 1.125rem;
+  flex-shrink: 0;
 }
 
-.label {
-  font-weight: 500;
-  font-size: 1rem;
+.nav-label {
+  white-space: nowrap;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .sidebar {
     position: fixed;
     height: 100vh;
-    z-index: 1000;
+    z-index: 40;
   }
 }
 </style>

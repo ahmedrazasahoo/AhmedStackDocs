@@ -101,7 +101,7 @@ const getViewLabel = (view) => {
             :class="{ active: activeView === 'pageThree' }"
             @click="setActiveView('pageThree')"
           >
-            Page Three
+            Form Inputs And Handling
           </button>
         </div>
       </div>

@@ -1,5 +1,13 @@
 <script>
+
+import card from '../pages/card.vue';
+
+
+
 export default {
+  components: {
+    card,
+  },
   data() {
     return {
       title: "Vue Practice",
@@ -48,12 +56,43 @@ export default {
           features: [],
         },
       ],
+      myObject: {
+        title: 'How to do lists in Vue',
+        author: 'Jane Doe',
+        publishedAt: '2016-04-10'
+      }
     };
   },
+  computed: {
+  SilverCarsData() {
+  return this.cars.filter(car => ["Silver", "Black"].includes(car.color))
+
+  }
+
+}
+,
   methods: {
     showCarInfo(car) {
       alert(`🚗 Car: ${car.car_name}\n🛠 Make Year: ${car.make}`);
     },
+
+    fillterData() {
+      return this.cars.filter(car => ["Silver", "Black"].includes(car.color))
+    },
+
+    finalCars(){
+      const newcar = {
+          car_name: "Suzuki Alto",
+          make: "2018",
+          color: "Silver",
+          price: "$6,200",
+          engine: "660cc",
+          transmission: "Automatic",
+          features: [],
+        }
+           this.cars.push(newcar)   
+    return  this.cars
+    }
   },
 };
 </script>
@@ -71,17 +110,31 @@ export default {
       <li>List Rendering with v-for and Destructuring</li>
       <li>List Rendering with v-for, Indexing, and Destructuring</li>
       <li>List Rendering with v-for and Nested Looping</li>
+      <li>List Rendering with v-for and Object render</li>
+
+      <li>List Rendering with v-for and v-if key And State</li>
+      <li>List Rendering with v-for and with a Component</li>
+      
     </ul>
+    <!-- v-for="(value, key, index) in myObject" -->
+    <!-- v-for="(car, index) in cars" -->
+    <!-- v-for="car in cars" :key="car.make" -->
+    <!-- <h2>{{car.car_name}}</h2> -->
+    <div
+     v-for="cr in finalCars()"
+    >
+      <card  :car="cr"/>
+    </div>
 
     <!-- Car List Card -->
-    <div class="card">
+    <!-- <div class="card">
       <h2 class="card-title">Cars List</h2>
       <p class="card-description">Static list of cars {{ index1 }}</p>
-      <div class="cars-container">
-        <!-- v-for="(car, index) in cars" -->
-        <!-- v-for="( { name,car_name , make, color, price ,engine, transmission } ,index ) in cars" -->
-        <!-- v-if="car.index = 1" -->
-        <div 
+      <div class="cars-container"> -->
+    <!-- v-for="(car, index) in cars" -->
+    <!-- v-for="( { name,car_name , make, color, price ,engine, transmission } ,index ) in cars" -->
+    <!-- v-if="car.index = 1" -->
+    <!-- <div 
           class="car-card" 
           v-for="(car, index) in cars"
           >
@@ -97,13 +150,16 @@ export default {
               <span>{{ feature.feature }}</span>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+        </div> -->
+    <!-- </div> -->
+    <!-- </div> -->
   </div>
 </template>
 
 <style scoped>
+h2{
+  color: #e8f4ff;
+}
 ul li {
   color: white;
 }
@@ -145,7 +201,6 @@ ul li {
   padding: 20px;
 }
 
-
 .card {
   background: #fff;
   border-radius: 15px;
@@ -155,7 +210,7 @@ ul li {
 }
 .car-card h3 {
   margin: 10px 0;
-  color:black;
+  color: black;
 }
 
 .card-title {

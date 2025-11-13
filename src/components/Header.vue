@@ -86,14 +86,15 @@ const getViewLabel = (view) => {
             :class="{ active: activeView === 'pageOne' }"
             @click="setActiveView('pageOne')"
           >
-            Page One
+            List Rendering​
+
           </button>
           <button 
             class="dropdown-item" 
             :class="{ active: activeView === 'pageTwo' }"
             @click="setActiveView('pageTwo')"
           >
-            Page Two
+            Event Handling
           </button>
           <button 
             class="dropdown-item" 

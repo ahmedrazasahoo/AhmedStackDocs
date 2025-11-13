@@ -5,7 +5,6 @@ import Directive from './Directive.vue'
 import PageOne from './PageOne.vue'
 import PageTwo from './PageTwo.vue'
 import PageThree from './PageThree.vue'
-
 defineProps({
   activeView: {
     type: String,

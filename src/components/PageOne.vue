@@ -2,8 +2,6 @@
 
 import card from '../pages/card.vue';
 
-
-
 export default {
   components: {
     card,
@@ -68,12 +66,12 @@ export default {
   return this.cars.filter(car => ["Silver", "Black"].includes(car.color))
 
   }
-
+   
 }
 ,
   methods: {
     showCarInfo(car) {
-      alert(`🚗 Car: ${car.car_name}\n🛠 Make Year: ${car.make}`);
+      alert(` Car ${car.car_name}\n Make Year ${car.make}`);
     },
 
     fillterData() {

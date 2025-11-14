@@ -32,7 +32,17 @@ const getViewLabel = (view) => {
     'three': 'Both',
     'pageOne': 'Page One',
     'pageTwo': 'Page Two',
-    'pageThree': 'Page Three'
+    'pageThree': 'Page Three',
+    'pageFour': 'Page Four',
+    'pageFive': 'Page Five',
+    'pageSix': 'Page Six',
+    'pageSeven': 'Page Seven',
+    'pageEight': 'Page Eight',
+    'pageNine': 'Page Nine',
+    'pageTen': 'Page Ten',
+    'pageEleven': 'Page Eleven',
+    'pageTwelve': 'Page Twelve',
+    'pageThirteen': 'Page Thirteen'
   }
   return labels[view] || 'Select View'
 }
@@ -96,12 +106,82 @@ const getViewLabel = (view) => {
           >
             Event Handling
           </button>
-          <button 
-            class="dropdown-item" 
+          <button
+            class="dropdown-item"
             :class="{ active: activeView === 'pageThree' }"
             @click="setActiveView('pageThree')"
           >
             Form Inputs And Handling
+          </button>
+          <button
+            class="dropdown-item"
+            :class="{ active: activeView === 'pageFour' }"
+            @click="setActiveView('pageFour')"
+          >
+            Page Four
+          </button>
+          <button
+            class="dropdown-item"
+            :class="{ active: activeView === 'pageFive' }"
+            @click="setActiveView('pageFive')"
+          >
+            Page Five
+          </button>
+          <button
+            class="dropdown-item"
+            :class="{ active: activeView === 'pageSix' }"
+            @click="setActiveView('pageSix')"
+          >
+            Page Six
+          </button>
+          <button
+            class="dropdown-item"
+            :class="{ active: activeView === 'pageSeven' }"
+            @click="setActiveView('pageSeven')"
+          >
+            Page Seven
+          </button>
+          <button
+            class="dropdown-item"
+            :class="{ active: activeView === 'pageEight' }"
+            @click="setActiveView('pageEight')"
+          >
+            Page Eight
+          </button>
+          <button
+            class="dropdown-item"
+            :class="{ active: activeView === 'pageNine' }"
+            @click="setActiveView('pageNine')"
+          >
+            Page Nine
+          </button>
+          <button
+            class="dropdown-item"
+            :class="{ active: activeView === 'pageTen' }"
+            @click="setActiveView('pageTen')"
+          >
+            Page Ten
+          </button>
+          <button
+            class="dropdown-item"
+            :class="{ active: activeView === 'pageEleven' }"
+            @click="setActiveView('pageEleven')"
+          >
+            Page Eleven
+          </button>
+          <button
+            class="dropdown-item"
+            :class="{ active: activeView === 'pageTwelve' }"
+            @click="setActiveView('pageTwelve')"
+          >
+            Page Twelve
+          </button>
+          <button
+            class="dropdown-item"
+            :class="{ active: activeView === 'pageThirteen' }"
+            @click="setActiveView('pageThirteen')"
+          >
+            Page Thirteen
           </button>
         </div>
       </div>
